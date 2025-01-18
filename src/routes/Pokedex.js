@@ -7,13 +7,12 @@ import {
   Text,
   Alert,
 } from 'react-native';
-import PokemonCard from '../components/PokemonCard';
 import PokedexList from '../components/PokedexList';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'left',
     marginHorizontal: 16
   },
   title: {
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
 function Pokedex() {
   
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <View>
         <PokedexList></PokedexList>
       </View>
