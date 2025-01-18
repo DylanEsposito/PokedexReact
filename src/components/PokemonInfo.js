@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
 
 const PokemonInfo = ({ poke_id }) => {
 
-  const [inputValue, setInputValue] = useState('');
   const [pokemonName, setPokemonName] = useState('');
   const [pokemonType, setPokemonType] = useState('');
   const [pokemonDesc, setPokemonDesc] = useState('');
@@ -66,20 +65,30 @@ const PokemonInfo = ({ poke_id }) => {
     left: false,
     right: false,
   });
+
+  /*
+  const handleRemoveItem = (poke_id) => {
+    dispatch(removeEntry(poke_id));
+  };
   
+  const handleAddItem = ( poke_id) => {
+    console.log("In handleAddItem trying to push" + poke_id);
+    let poke = { id: poke_id };
+    dispatch(addEntry(poke));
+  };*/
+
   return ( 
     <div>
       <SafeAreaView style={styles.container}>
-      <View>
-        <div>
-            <h2>{pokemonName}</h2>
-            <p>Type: {pokemonType}</p>
-            <p>{pokemonDesc}
-            </p>
-            <PokemonImg pokemonId={poke_id}></PokemonImg>
-        </div>
-    </View>
-  </SafeAreaView>
+        <View>
+          <div>
+              <h2>{pokemonName}</h2>
+              <p>Type: {pokemonType}</p>
+              <p>{pokemonDesc} </p>
+              <PokemonImg pokemonId={poke_id}></PokemonImg>
+          </div>
+        </View>
+      </SafeAreaView>
     </div>
   )
 }

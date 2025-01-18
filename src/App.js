@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import About from './routes/About';
 import Pokedex from './routes/Pokedex';
 import SinglePokemon from './routes/SinglePokemon';
+import Team from './routes/Team';
 import Navbar from './components/Navbar';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/Pokedex" element={<Pokedex />} />
           <Route path="/Pokemon/" element={<SinglePokemon />} />
           <Route path="/Pokemon/:id" element={<SinglePokemon />} />
+          <Route path="/Team/" element={<Team />} />
         </Routes>
       </Router>
     </div>

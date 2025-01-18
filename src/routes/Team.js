@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../App.css'; // Add some basic styling here
+import { useSelector } from 'react-redux';
 import {
   StyleSheet,
   View,
@@ -7,6 +8,8 @@ import {
   Text,
   Alert,
 } from 'react-native';
+
+import MiniCard from '../components/MiniCard';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,18 +32,20 @@ const styles = StyleSheet.create({
   },
 });
       
-function About() {
-  
+function Team() {
+
+  const items = useSelector((state) => state.items);
+  console.log(items);
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <View>
-        <h2 id="AboutBlurb"> So the purpose of this website to showcase all 151 original pokemon
-        </h2>
-        <h1 id="Disclaimer"> Disclaimer: I do not own any of these characters
-        </h1>
+        <h2 id="AboutBlurb"> Your Current Team: </h2>
+        {items.map(pokemon => (
+            <MiniCard key={pokemon.id} entry={pokemon} />
+        ))}
       </View>
     </SafeAreaView>
   )
 }
 
-export default About;
+export default Team;
