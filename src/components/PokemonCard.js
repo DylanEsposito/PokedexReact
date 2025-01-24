@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import PokemonImg from './PokemonImg';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { addEntry, removeEntry } from '../features/team/teamActions';
 
@@ -37,7 +36,7 @@ const PokemonCard = ({ pokePreview }) => {
 
   let handleAddItem = ( currPoke) => {
     console.log("In handleAddItem trying to push" + currPoke);
-    let poke = { id: currPoke.pokemon_id, name: currPoke.pokemon_name };
+    let poke = { id: currPoke.id, name: currPoke.name };
     dispatch(addEntry(poke));
   };
 
@@ -45,10 +44,10 @@ const PokemonCard = ({ pokePreview }) => {
     <div className="pokemon-card">
       <h2>{pokePreview.pokemon_name}</h2>
       <button onClick={() => handleAddItem(pokePreview)}> Add </button>
-      <button onClick={() => handleRemoveItem(pokePreview.pokemon_id)}> Remove </button>
-      <p>Type: {pokePreview.pokemon_type}</p>
-      <PokemonImg pokemonId={pokePreview.pokemon_id}></PokemonImg>
-      <button onClick={() => loadPokeSingle(pokePreview.pokemon_id)}> Click </button>
+      <button onClick={() => handleRemoveItem(pokePreview.id)}> Remove </button>
+      <p>Type: {pokePreview.type}</p>
+      <PokemonImg pokemonId={pokePreview.id}></PokemonImg>
+      <button onClick={() => loadPokeSingle(pokePreview.name)}> Click </button>
     </div>
   );
 };

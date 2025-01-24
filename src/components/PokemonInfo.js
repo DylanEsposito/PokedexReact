@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
   StyleSheet,
@@ -6,6 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import PokemonImg from './PokemonImg';
+import { addEntry, removeEntry } from '../features/team/teamActions';
 
 const styles = StyleSheet.create({
   container: {
@@ -34,6 +36,8 @@ const PokemonInfo = ({ poke_id }) => {
   const [pokemonDesc, setPokemonDesc] = useState('');
   console.log("This is the pokemon id " + poke_id);
 
+  const dispatch = useDispatch();
+
   //DEE Refactor and rename this to something better Should be called only once on load
   useEffect(() => {
     const sendMessageToBackend = async () => {
@@ -45,9 +49,9 @@ const PokemonInfo = ({ poke_id }) => {
           number: tempValue, // Sending the input value
         });
         console.log(response);
-        setPokemonName(response.data.pokemon_name);
-        setPokemonType(response.data.pokemon_type);
-        setPokemonDesc(response.data.pokemon_desc);
+        setPokemonName(response.data.name);
+        setPokemonType(response.data.type);
+        setPokemonDesc(response.data.desc);
         //setPokemonImg(bookResponse.data)
         /*
         const tocResponse = await axios.get('http://localhost:3085/books/tableofcontents');
@@ -61,11 +65,15 @@ const PokemonInfo = ({ poke_id }) => {
     sendMessageToBackend();
   }, []);
 
-  const [tabState, setTabState] = useState({
-    left: false,
-    right: false,
-  });
-
+  let handleRemoveItem = (id) => {
+      dispatch(removeEntry(id));
+  };
+  
+  let handleAddItem = (pId, pName) => {
+    console.log("In handleAddItem trying to push" + pName);
+    let poke = { id: pId, name: pName };
+    dispatch(addEntry(poke));
+  };
   /*
   const handleRemoveItem = (poke_id) => {
     dispatch(removeEntry(poke_id));
@@ -85,6 +93,8 @@ const PokemonInfo = ({ poke_id }) => {
               <h2>{pokemonName}</h2>
               <p>Type: {pokemonType}</p>
               <p>{pokemonDesc} </p>
+              <button onClick={() => handleAddItem(poke_id, pokemonName)}> Add </button>
+              <button onClick={() => handleRemoveItem(poke_id)}> Remove </button>
               <PokemonImg pokemonId={poke_id}></PokemonImg>
           </div>
         </View>
